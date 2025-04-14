@@ -9,24 +9,60 @@ load_dotenv()
 MOCK_USR = os.getenv("MOCK_USER_NAME")
 MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
+#Sign up
+MOCK_EMAIL = os.getenv("MOCK_EMAIL")
+MOCK_PASSWORD_SIGNUP = "Dekaigu9!"
+MOCK_DATE = "03131998"
+MOCK_FIRSTNAME = os.getenv("MOCK_FIRSTNAME")
+MOCK_LASTNAME = os.getenv("MOCK_LASTNAME")
+
 """"
 
    
 
 """
 
-def login():
+#def login():
     #click on red button
-    do_tap(389, 961)
+   # do_tap(724, 206)
     # type accont
-    do_input_text(MOCK_USR)
+   # do_input_text(MOCK_USR)
     # type continue
-    do_tap(397, 907)
+  #  do_tap(733, 204)
     # click input password
-    do_tap(385, 473)
+   # do_tap(724, 780)
     # type password
-    do_input_text(MOCK_PASWD)
+  #  do_input_text(MOCK_PASWD)
     # click continue button
-    do_tap(377, 1057)
+   # do_tap(721, 2230)
+
+def signup():
+
+    #click on Create An Account button
+    do_tap(377, 1058)
+    # type email
+    do_input_text(MOCK_EMAIL)
+    # press continue
+    do_tap(379, 941)
+    # type First name
+    do_input_text(MOCK_FIRSTNAME)
+    # press password
+    do_tap(337, 581)
+     # type last name
+    do_input_text(MOCK_LASTNAME)
+    # press continue
+    do_tap(379, 997)
+    # type date
+    do_input_text(MOCK_DATE)
+    # click password field 
+    do_tap(353, 486)
+    # input password 
+    do_input_text(MOCK_PASSWORD_SIGNUP)
+    # press Confirm Password
+    do_tap(363, 608)
+    # input confirm password 
+    do_input_text(MOCK_PASSWORD_SIGNUP)
+    # press continue
+    do_tap(382, 1007)
 
 
