@@ -23,7 +23,7 @@ PACKAGE_NAME = os.getenv("PACKAGE_NAME")
 def do_test():
 
     helper.check_device()
-    helper.set_proxy(PROXY_HOST, PROXY_PORT)
+    #helper.set_proxy(PROXY_HOST, PROXY_PORT)
     
     print(f"[+] Initiating tests on: {PACKAGE_NAME}")
 
