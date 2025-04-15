@@ -43,7 +43,7 @@ def signup():
     # type email
     do_input_text(MOCK_EMAIL)
     # press continue
-    do_tap(379, 941)
+    do_tap(373, 1000)
     # type First name
     do_input_text(MOCK_FIRSTNAME)
     # press password
