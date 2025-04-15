@@ -51,7 +51,7 @@ def signup():
      # type last name
     do_input_text(MOCK_LASTNAME)
     # press continue
-    do_tap(616, 951)
+    do_tap(415, 975) 
     # type date
     do_input_text(MOCK_DATE)
     # press continue      
