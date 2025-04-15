@@ -34,7 +34,7 @@ jobs:
           PACKAGE_NAME: ${{vars.PACKAGE_NAME}}
           MOCK_USER_NAME: ${{secrets.MOCK_USER_NAME}}
           MOCK_PASSWORD: ${{secrets.MOCK_PASSWORD}}
-          MOCK_EMAIL: ${{secrets.MOCK_EMAIL}
+          MOCK_EMAIL: ${{secrets.MOCK_EMAIL}}
           MOCK_FIRSTNAME: ${{secrets.MOCK_FIRSTNAME}}
           MOCK_LASTNAME: ${{secrets.MOCK_LASTNAME}}
           
