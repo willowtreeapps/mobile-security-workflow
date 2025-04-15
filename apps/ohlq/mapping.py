@@ -65,7 +65,7 @@ def signup():
     # input confirm password 
     do_input_text(MOCK_PASSWORD_SIGNUP)
     # # press continue
-    do_tap(382, 1002)
+    do_tap(396, 1053)
 
     do_sleep(20)
 
