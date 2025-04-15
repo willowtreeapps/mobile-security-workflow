@@ -1,4 +1,4 @@
-from service.input_service import do_tap, do_input_text
+from service.input_service import do_tap, do_input_text, do_sleep
 from dotenv import load_dotenv
 import os
 
@@ -55,7 +55,7 @@ def signup():
     # type date
     do_input_text(MOCK_DATE)
     # press continue      
-    do_tap(401, 1084)
+    do_tap(404, 1044)
     # click password field 
     do_tap(378, 486)
     # input password 
@@ -66,5 +66,7 @@ def signup():
     do_input_text(MOCK_PASSWORD_SIGNUP)
     # # press continue
     do_tap(382, 1002)
+
+    do_sleep(20)
 
 
