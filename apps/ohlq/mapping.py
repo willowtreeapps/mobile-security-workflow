@@ -6,8 +6,8 @@ import os
 load_dotenv()
 
 # -     DEFINE THE MOCK DATA    -
-MOCK_USR = os.getenv("MOCK_USER_NAME")
-MOCK_PASWD = os.getenv("MOCK_PASSWORD")
+#MOCK_USR = os.getenv("MOCK_USER_NAME")
+#MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
 #Sign up
 MOCK_EMAIL = os.getenv("MOCK_EMAIL")
