@@ -28,7 +28,7 @@ def do_test(package):
 
     ohlq.signup()
 
-    vuln_service.search_shared_pref(MOCK_USR, package)
+    vuln_service.search_shared_pref(MOCK_PASSWORD_SIGNUP, package)
 
     vuln_service.search_sqlite(MOCK_EMAIL, package)
 
