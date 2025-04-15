@@ -55,16 +55,16 @@ def signup():
     # type date
     do_input_text(MOCK_DATE)
     # press continue      
-    do_tap(380, 998)
+    do_tap(401, 1084)
     # click password field 
-    do_tap(353, 486)
+    do_tap(378, 486)
     # input password 
     do_input_text(MOCK_PASSWORD_SIGNUP)
     # press Confirm Password
-    do_tap(363, 608)
+    do_tap(381, 619)
     # input confirm password 
     do_input_text(MOCK_PASSWORD_SIGNUP)
     # # press continue
-    do_tap(382, 1007)
+    do_tap(382, 1002)
 
 
