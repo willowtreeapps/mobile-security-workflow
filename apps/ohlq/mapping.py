@@ -51,20 +51,27 @@ def signup():
      # type last name
     do_input_text(MOCK_LASTNAME)
     # press continue
-    do_tap(415, 975) 
+    do_tap(390, 975) 
     # type date
     do_input_text(MOCK_DATE)
     # press continue      
     do_tap(380, 998)
-    # click password field 
-    do_tap(353, 486)
-    # input password 
-    do_input_text(MOCK_PASSWORD_SIGNUP)
-    # press Confirm Password
-    do_tap(363, 608)
-    # input confirm password 
-    do_input_text(MOCK_PASSWORD_SIGNUP)
-    # press continue
-    do_tap(382, 1007)
+
+    do_tap(197, 966)
+
+    do_tap(489, 966)
+
+    do_tap(367, 976)
+
+    # # click password field 
+    # do_tap(353, 486)
+    # # input password 
+    # do_input_text(MOCK_PASSWORD_SIGNUP)
+    # # press Confirm Password
+    # do_tap(363, 608)
+    # # input confirm password 
+    # do_input_text(MOCK_PASSWORD_SIGNUP)
+    # # press continue
+    # do_tap(382, 1007)
 
 
