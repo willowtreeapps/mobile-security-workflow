@@ -35,7 +35,7 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_USR, package)
 
     vuln_service.search_sqlite(MOCK_USR, package)
-    
+
     vuln_service.search_sqlite(MOCK_PASWD, package)
 
     vuln_service.search_sensitive_log(MOCK_USR)
@@ -63,7 +63,7 @@ def do_test(package):
     # -     Create the .sarif File Report
     vuln_service.build_report()
 
-    do_close(package)
+    #do_close(package)
 
 
 
