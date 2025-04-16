@@ -28,12 +28,16 @@ def search_for_data(path, sensitive_data):
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         tables = cursor.fetchall()
 
+        print('SENSTITIVE DATA NOW --')
+        print(sensitive_data)
+
         if tables:
             for tb in tables:               
                 tb_name = tb[0]
                 # -     Search for the content of the table
                 content = search_for(tb_name, cursor)
                 if content:
+                    print(f'[ ] Content of {tb} ')
                     if has_sensitive_data(content, sensitive_data):
                         # -     Format the evidence for github actions
                         evidence = f"// SELECT * FROM {tb_name} - - {path}\n\n{content}"                       
