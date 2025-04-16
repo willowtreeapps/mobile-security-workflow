@@ -37,6 +37,10 @@ def login():
     do_tap(385, 1009)
     # wait for login complete
     do_sleep(20)
+    # tap skip
+    do_tap(385, 1009)
+    # tap skip
+    do_tap(385, 1009)
 
 # def signup():
 
