@@ -8,10 +8,12 @@ load_dotenv()
 
 
 def do_test(package):
-    # -     Define the Mock Data    -
+    # -     Define the Mock Data  (Login)   -
     MOCK_USR = os.getenv("MOCK_USER_NAME")
     MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
+
+    # -     Define the Mock Data  (Signup)  -
     MOCK_EMAIL = os.getenv("MOCK_EMAIL")
     MOCK_PASSWORD_SIGNUP = "Dekaigu9!"
     MOCK_DATE = "03131998"
@@ -26,7 +28,21 @@ def do_test(package):
 
     vuln_service.check_emulator(package)
 
+    # --- Login function ------
+
     ohlq.login()
+
+    vuln_service.search_shared_pref(MOCK_USR, package)
+
+    vuln_service.search_sqlite(MOCK_USR, package)
+    vuln_service.search_sqlite(MOCK_PASWD, package)
+
+    vuln_service.search_sensitive_log(MOCK_USR)
+    vuln_service.search_sensitive_log(MOCK_PASWD)
+
+    # ---- Sinup function -------
+
+    vuln_service.search_shared_pref(MOCK_USR, package)
 
     vuln_service.search_shared_pref(MOCK_PASSWORD_SIGNUP, package)
 
