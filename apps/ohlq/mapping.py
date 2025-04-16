@@ -34,7 +34,9 @@ def login():
     # type password
     do_input_text(MOCK_PASWD)
     # click continue button
-    do_tap(377, 1057)
+    do_tap(385, 1009)
+    # wait for login complete
+    do_sleep(20)
 
 # def signup():
 
