@@ -41,7 +41,7 @@ def search_for_data(path, sensitive_data):
                     print(content)
                     if has_sensitive_data(content, sensitive_data):
                         # -     Format the evidence for github actions
-                        evidence = f"// SELECT * FROM {tb_name} - - {path}\n\n{content}"                       
+                        evidence = f"// SELECT * FROM {tb_name} / Database: {path}\n\n{content}"                       
                         return True, evidence                                
         else:
             print("No tables found in the db")
