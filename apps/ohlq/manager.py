@@ -43,7 +43,7 @@ def do_test(package):
 
     # ---- Sinup function -------
 
-     ohlq.signup()
+    ohlq.signup()
 
     vuln_service.search_shared_pref(MOCK_USR, package)
 
