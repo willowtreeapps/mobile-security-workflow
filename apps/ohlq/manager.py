@@ -26,21 +26,27 @@ def do_test(package):
 
     vuln_service.check_emulator(package)
 
-    ohlq.signup()
+    ohlq.login()
 
     vuln_service.search_shared_pref(MOCK_PASSWORD_SIGNUP, package)
 
+    vuln_service.search_shared_pref(MOCK_EMAIL, package)
+
     vuln_service.search_sqlite(MOCK_EMAIL, package)
+
+    vuln_service.search_sqlite(MOCK_PASSWORD_SIGNUP, package)
 
     # -     Look to Sensitive data in Logs
     vuln_service.search_sensitive_log(MOCK_PASSWORD_SIGNUP)
 
     vuln_service.search_sensitive_log(MOCK_FIRSTNAME)
 
+    vuln_service.search_sensitive_log(MOCK_EMAIL)
+
     # -     Create the .sarif File Report
     vuln_service.build_report()
 
-    #do_close(package)
+    do_close(package)
 
 
 
