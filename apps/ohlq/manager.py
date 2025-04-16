@@ -63,7 +63,7 @@ def do_test(package):
     # -     Create the .sarif File Report
     vuln_service.build_report()
 
-    #do_close(package)
+    do_close(package)
 
 
 
