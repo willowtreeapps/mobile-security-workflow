@@ -23,18 +23,18 @@ MOCK_LASTNAME = os.getenv("MOCK_LASTNAME")
 """
 
 def login():
-  #click on red button
-  do_tap(724, 206)
-  # type accont
-  do_input_text(MOCK_USR)
-  # type continue
-  do_tap(733, 204)
-  #click input password
-  do_tap(724, 780)
-  #type password
-  do_input_text(MOCK_PASWD)
-  #click continue button
-  do_tap(721, 2230)
+    #click on red button
+    do_tap(389, 961)
+    # type accont
+    do_input_text(MOCK_USR)
+    # type continue
+    do_tap(397, 907)
+    # click input password
+    do_tap(385, 473)
+    # type password
+    do_input_text(MOCK_PASWD)
+    # click continue button
+    do_tap(377, 1057)
 
 # def signup():
 
