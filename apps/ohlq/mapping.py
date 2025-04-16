@@ -36,7 +36,7 @@ def login():
     # click continue button
     do_tap(385, 1009)
     # wait for login complete
-    do_sleep(20)
+    do_sleep(10)
     # tap skip
     do_tap(375, 1102)
     # tap skip
