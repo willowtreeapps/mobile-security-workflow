@@ -43,7 +43,7 @@ def do_restart(package):
 
 def do_open(package):
     execute_command(f"adb shell monkey -p {package} -c android.intent.category.LAUNCHER 1")
-    do_sleep(9)
+    do_sleep(10)
 
 # -    Execute a BACK/RETURN action on the device
 def do_back():
