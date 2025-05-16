@@ -1,7 +1,6 @@
 from service.log_service import do_log_output
 import subprocess
 import time
-import sys
 
 """
 
