@@ -40,9 +40,7 @@ def do_test():
         case "com.ohlq.app.stage":
             ohql.do_test(PACKAGE_NAME)          
         case _:
-            print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")    
-
-    time.sleep(50)
+            print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
 
     helper.close_webhook() 
     sys.exit()
