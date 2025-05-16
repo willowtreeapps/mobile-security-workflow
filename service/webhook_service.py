@@ -17,7 +17,8 @@ import threading
 load_dotenv()
 
 WEBHOOK_PORT = os.getenv("WEBHOOK_PORT")
-server_address = ('localhost', int(WEBHOOK_PORT))
+WEBHOOK_SERVER = os.getenv("WEBHOOK_SERVER")
+server_address = (WEBHOOK_SERVER, int(WEBHOOK_PORT))
 
 class HttpHandler(BaseHTTPRequestHandler):
     def do_POST(self):
