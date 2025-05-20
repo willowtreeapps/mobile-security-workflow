@@ -12,7 +12,6 @@ def do_test(package):
     MOCK_USR = os.getenv("MOCK_USER_NAME")
     MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
-
     # -     Open the App     -
     do_open(package)
 
