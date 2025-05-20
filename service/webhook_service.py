@@ -17,8 +17,7 @@ import threading
 load_dotenv()
 
 WEBHOOK_PORT = os.getenv("WEBHOOK_PORT")
-WEBHOOK_SERVER = os.getenv("WEBHOOK_SERVER")
-server_address = (WEBHOOK_SERVER, int(WEBHOOK_PORT))
+server_address = ('localhost', int(WEBHOOK_PORT))
 
 class HttpHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -37,7 +36,7 @@ class HttpHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b'{"status": "received"}')
 
                 if self.path == '/vulnerability/ssl':
-                    vul_service.create_ssl_vul(data)                
+                    vul_service.create_ssl_vul(data)                  
 
             except json.JSONDecodeError:
                 self.send_response(400)
