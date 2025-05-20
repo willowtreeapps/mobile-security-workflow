@@ -26,6 +26,8 @@ PACKAGE_NAME = os.getenv("PACKAGE_NAME")
 def do_test():
 
     helper.check_device()    
+    
+    print(f"[+] Initiating tests on: {PACKAGE_NAME}")
 
     helper.set_proxy(PROXY_HOST, PROXY_PORT)
     helper.start_webhook()
@@ -38,9 +40,7 @@ def do_test():
         case "com.ohlq.app.stage":
             ohql.do_test(PACKAGE_NAME)          
         case _:
-            print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")    
-
-    time.sleep(10)
+            print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
 
     helper.close_webhook() 
     sys.exit()
