@@ -2,12 +2,12 @@ import os
 from common import helper
 from apps.andro_goat import manager as androgoat
 from apps.va_lottery import manager as vallotery
+from apps.scooters import manager as scooters
 from apps.ohlq import manager as ohql
 from service.log_service import log_splash
 from dotenv import load_dotenv
 import os
 import sys
-
 import time
 
 """"
@@ -38,9 +38,14 @@ def do_test():
         case "com.va.lottery.uat":
             vallotery.do_test(PACKAGE_NAME)
         case "com.ohlq.app.stage":
-            ohql.do_test(PACKAGE_NAME)          
+            ohql.do_test(PACKAGE_NAME)
+        case "com.trubeacon.scooters_mobile_android":
+            scooters.do_test(PACKAGE_NAME)
         case _:
             print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
+
+    # -     Give some extra time to check for SSL Pinning interceptions
+    time.sleep(30)
 
     helper.close_webhook() 
     sys.exit()
