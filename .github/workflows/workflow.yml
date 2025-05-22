@@ -36,8 +36,8 @@ jobs:
           MOCK_PASSWORD: ${{vars.MOCK_PASSWORD}}
           MOCK_EMAIL: ${{vars.MOCK_EMAIL}}
           MOCK_PHONE: ${{vars.MOCK_PHONE}}
-          MOCK_FIRS_TNAME: ${{vars.MOCK_FIRST_NAME}}
-          MOCK_LASTNAME: ${{vars.MOCK_LAST_NAME}}
+          MOCK_FIRST_NAME: ${{vars.MOCK_FIRST_NAME}}
+          MOCK_LAST_NAME: ${{vars.MOCK_LAST_NAME}}
           
       - name: Upload SARIF results
         uses: github/codeql-action/upload-sarif@v3
