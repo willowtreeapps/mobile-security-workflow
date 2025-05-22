@@ -55,5 +55,5 @@ def do_close(package):
 
 # -    Scroll down the screen a bit
 def do_scroll_down():
-    execute_command("adb shell input swipe 384 1000 384 300")
+    execute_command("adb shell input swipe 384 800 384 300")
     
