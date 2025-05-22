@@ -52,3 +52,8 @@ def do_back():
 # -    Close the app
 def do_close(package):
     execute_command(f"adb shell am force-stop {package}")
+
+# -    Scroll down the screen a bit
+def do_scroll_down():
+    execute_command("adb shell input swipe 384 1000 384 300")
+    
