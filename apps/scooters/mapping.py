@@ -10,6 +10,7 @@ MOCK_FIRST_NAME = os.getenv("MOCK_FIRST_NAME")
 MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
 MOCK_EMAIL = os.getenv("MOCK_EMAIL")
 MOCK_PHONE = os.getenv("MOCK_PHONE")
+MOCK_PASSWORD = os.getenv("MOCK_PASSWORD")
 
 """"
 
@@ -58,8 +59,23 @@ def create_account():
     do_scroll_down()
     # tap continue
     do_tap(371, 1016)
-
+                
     
-    
-    
-    
+def do_login():
+   # -- First Screen --
+    # tap login button
+    do_tap(395, 840)
+    # scroll down the screen
+    do_scroll_down()
+     # tap sign in with password
+    do_tap(373, 981)
+     # tap email field
+    do_tap(221, 689)
+    do_input_text(MOCK_EMAIL)
+     # tap password field
+    do_tap(175, 826)
+    do_input_text(MOCK_PASSWORD)
+    # tap signin button
+    do_tap(393, 1009)
+   
+   
