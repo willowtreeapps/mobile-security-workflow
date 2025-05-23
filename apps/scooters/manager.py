@@ -21,14 +21,12 @@ def do_test(package):
     MOCK_PHONE = os.getenv("MOCK_PHONE")
     
     # -     Open the App     -
-    do_open(package)
-    
-    print("[*] Variables", MOCK_EMAIL,MOCK_FIRST_NAME, MOCK_LAST_NAME, MOCK_PHONE)
+    do_open(package)    
 
     vuln_service.check_root(package)
     vuln_service.check_emulator(package)
     
-    scooters.create_account()
+    scooters.do_login()
     
     # -     Search for Vulnerabilities at Shared pref 
     vuln_service.search_shared_pref(MOCK_EMAIL, package)
