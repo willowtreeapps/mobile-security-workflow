@@ -20,9 +20,9 @@ def has_sensitive_data(data, sensitive_data):
 
     return sensitive_data in data_str
 
-def search_for_data(path, sensitive_data):
+def search_for_data(file, path, sensitive_data):
     try:
-        conn = sqlite3.connect(path)
+        conn = sqlite3.connect(file)
         cursor = conn.cursor()
         # -     Search for all the tables structure in the database
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
@@ -36,7 +36,7 @@ def search_for_data(path, sensitive_data):
                 if content:
                     if has_sensitive_data(content, sensitive_data):
                         # -     Format the evidence for github actions
-                        evidence = f"// SELECT * FROM {tb_name} on {path} \n\n{content}"                       
+                        evidence = f"// SELECT * FROM {tb_name} on {path}{file} \n\n{content}"                       
                         return True, evidence                                
         else:
             print("No tables found in the db")
