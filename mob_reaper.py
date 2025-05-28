@@ -8,7 +8,7 @@ from service.log_service import log_splash
 from dotenv import load_dotenv
 import os
 import sys
-import time
+
 
 """"
 
@@ -44,8 +44,7 @@ def do_test():
         case _:
             print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
 
-    # -     Give some extra time to check for SSL Pinning interceptions
-    time.sleep(30)
+    # -     Give some extra time to check for SSL Pinning interceptions    
 
     helper.close_webhook() 
     sys.exit()

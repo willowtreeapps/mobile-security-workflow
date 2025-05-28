@@ -3,6 +3,7 @@ from service.input_service import do_restart, do_open, do_close
 from service import vulnerability_service as vuln_service
 from apps.scooters import mapping as scooters
 import os
+import time
 
 """"
 
@@ -31,13 +32,11 @@ def do_test(package):
     # -     Search for Vulnerabilities at Shared pref 
     vuln_service.search_shared_pref(MOCK_EMAIL, package)
     vuln_service.search_shared_pref(MOCK_FIRST_NAME, package)
-    vuln_service.search_shared_pref(MOCK_PHONE, package)
-    
+    vuln_service.search_shared_pref(MOCK_PHONE, package)    
     
     # -     Look to Sensitive Data at SQLite
     vuln_service.search_sqlite(MOCK_EMAIL, package)
     vuln_service.search_sqlite(MOCK_LAST_NAME, package)
-
     
     # -     Look to Sensitive data in Logs
     vuln_service.search_sensitive_log(MOCK_EMAIL)
@@ -47,6 +46,8 @@ def do_test(package):
     vuln_service.search_sensitive_external(MOCK_EMAIL)
     vuln_service.search_sensitive_external(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_external(MOCK_LAST_NAME)
+    
+    time.sleep(30)
         
     # -     Create the .sarif File Report
     vuln_service.build_report()    
