@@ -47,7 +47,7 @@ def do_test(package):
     vuln_service.search_sensitive_external(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_external(MOCK_LAST_NAME)
     
-    time.sleep(30)
+    time.sleep(20)
         
     # -     Create the .sarif File Report
     vuln_service.build_report()    
