@@ -44,8 +44,6 @@ def do_test():
         case _:
             print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
 
-    # -     Give some extra time to check for SSL Pinning interceptions    
-
     helper.close_webhook() 
     sys.exit()
 
