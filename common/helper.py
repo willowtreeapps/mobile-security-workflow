@@ -2,6 +2,8 @@ from service.input_service import execute_command
 from service import webhook_service
 import re
 import sys
+import hashlib
+
 
 #
 # -    Checks if there are Devices Connected   -
@@ -28,3 +30,7 @@ def start_webhook():
 def close_webhook():
     print("[-] Closing the Webhook ..")
     webhook_service.stop_webhook()
+    
+# -     Make a simple md5 hashing
+def make_hash(data):
+    return hashlib.md5(data.encode('utf-8')).hexdigest()
