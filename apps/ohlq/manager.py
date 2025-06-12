@@ -3,6 +3,7 @@ from service.input_service import do_restart, do_open, do_close
 from service import vulnerability_service as vuln_service
 from apps.ohlq import mapping as ohlq
 import os
+import time
 
 load_dotenv()
 
@@ -20,6 +21,8 @@ def do_test(package):
 
     # -     Login in the application
     ohlq.login()
+    
+    time.sleep(20)
 
     # -     Look to Sensitive data in Shared Pref
     vuln_service.search_shared_pref(MOCK_PASWD, package)
