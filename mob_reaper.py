@@ -39,6 +39,8 @@ def do_test():
             vallotery.do_test(PACKAGE_NAME)
         case "com.ohlq.app.stage":
             ohql.do_test(PACKAGE_NAME)
+        case "com.ohlq.app.dev":
+            ohql.do_test(PACKAGE_NAME)
         case "com.trubeacon.scooters_mobile_android":
             scooters.do_test(PACKAGE_NAME)
         case _:
