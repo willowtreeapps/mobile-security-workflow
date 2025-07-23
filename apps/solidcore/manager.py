@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from service.input_service import do_restart, do_open, do_close
 from service import vulnerability_service as vuln_service
 from apps.solidcore import mapping as solidcore
-import solidcore
 import os
 import time
 
