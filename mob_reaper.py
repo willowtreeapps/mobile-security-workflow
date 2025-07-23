@@ -4,6 +4,7 @@ from apps.andro_goat import manager as androgoat
 from apps.va_lottery import manager as vallotery
 from apps.scooters import manager as scooters
 from apps.ohlq import manager as ohql
+from apps.solidcore import manager as solidcores
 from service.log_service import log_splash
 from dotenv import load_dotenv
 import os
@@ -43,7 +44,12 @@ def do_test():
             ohql.do_test(PACKAGE_NAME)
         case "com.trubeacon.scooters_mobile_android":
             scooters.do_test(PACKAGE_NAME)
+        case "com.trubeacon.scooters_mobile_android":
+            scooters.do_test(PACKAGE_NAME)
+        case "com.bluespring.solidcorereactnative.staging":
+            solidcores.do_test(PACKAGE_NAME)
         case _:
+
             print(f"[-] Error: This application is not mapped: {PACKAGE_NAME}")        
 
     helper.close_webhook() 
