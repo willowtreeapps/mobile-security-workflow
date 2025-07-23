@@ -13,7 +13,7 @@ MOCK_PHONE = os.getenv("MOCK_PHONE")
 MOCK_PASSWORD = os.getenv("MOCK_PASSWORD")
 CODE = os.getenv("000000")
 NUMBER = os.getenv("7135403385")
-DATE_YEAR = os.getenv("DATE_YEAR)")
+DATE_YEAR = os.getenv("DATE_YEAR")
 
 """"
 
