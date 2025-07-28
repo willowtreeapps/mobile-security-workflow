@@ -38,6 +38,11 @@ jobs:
           MOCK_PHONE: ${{vars.MOCK_PHONE}}
           MOCK_FIRST_NAME: ${{vars.MOCK_FIRST_NAME}}
           MOCK_LAST_NAME: ${{vars.MOCK_LAST_NAME}}
+          MOCK_NUMBER: ${{vars.MOCK_NUMBER}}
+          DATE_YEAR: ${{vars.MOCK_YEAR}}
+          MOCK_CARD_NUMBER: ${{vars.MOCK_CARD_NUMBER}}
+          MOCK_EXPIRATION_DATE: ${{vars.MOCK_EXPIRATION_DATE}}
+          MOCK_CARD_ADDRESS: ${{vars.MOCK_CARD_ADDRESS}}
           
       - name: Upload SARIF results
         uses: github/codeql-action/upload-sarif@v3
