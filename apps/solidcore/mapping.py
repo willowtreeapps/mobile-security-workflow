@@ -11,12 +11,12 @@ MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
 MOCK_EMAIL = os.getenv("MOCK_EMAIL")
 MOCK_PHONE = os.getenv("MOCK_PHONE")
 MOCK_PASSWORD = os.getenv("MOCK_PASSWORD")
-CODE = os.getenv("000000")
-NUMBER = os.getenv("7135403385")
+MOCK_CODE = os.getenv("MOCK_CODE")
+MOCK_NUMBER = os.getenv("MOCK_NUMBER")
 DATE_YEAR = os.getenv("DATE_YEAR")
-CREDIT_NUMBER = os.getenv("4032035724657051")
-EXPIRATION_DATE = os.getenv("102030")
-CREDIT_CARD_ADDRESS = os.getenv("6519 Amberfield")
+MOCK_CARD_NUMBER = os.getenv("MOCK_CARD_NUMBER")
+MOCK_EXPIRATION_DATE = os.getenv("MOCK_EXPIRATION_DATE")
+MOCK_CARD_ADDRESS = os.getenv("MOCK_CARD_ADDRESS")
 ZIP_CODE = os.getenv("77449")
 
 """"
@@ -75,7 +75,7 @@ def do_create():
     do_tap(540, 552)
     do_tap(540, 552)
     do_tap(540, 552)
-    # Eneter Date Year
+    # Enter Date Year
     do_input_text(DATE_YEAR)
     #Select Ok
     do_tap(547,812)
@@ -184,13 +184,13 @@ def do_payment():
     # tap card number 
     do_tap(154, 365)
     # Enter card number
-    do_input_text(CREDIT_NUMBER)
+    do_input_text(MOCK_CARD_NUMBER)
     # tap Expiration Date  
     do_tap(194, 828)
     # tap Expiration Date  
     do_tap(64, 873)
     #Put digits
-    do_input_text(EXPIRATION_DATE)
+    do_input_text(MOCK_EXPIRATION_DATE)
     # Save card Button  
     do_tap(360, 1161)
     #Sleep
