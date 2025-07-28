@@ -123,79 +123,79 @@ def do_create():
     # Select Complete Sign Up
     do_tap(366, 1124)
 
-def do_login():
+#def do_login():
      # -- First Screen --
     # tap email field
-    do_tap(322, 836)
+#    do_tap(322, 836)
     # Enter email address
-    do_input_text(MOCK_EMAIL)
+#    do_input_text(MOCK_EMAIL)
     # tap continue
-    do_tap(375, 1006)
+#    do_tap(375, 1006)
     # verify it's you
-    do_tap(690, 577)
+#    do_tap(690, 577)
     # tap squares
-    do_tap(93, 543)
+#    do_tap(93, 543)
     # tap squares
-    do_tap(93, 543)
+#    do_tap(93, 543)
     #Sleep
-    do_sleep(10) 
+#    do_sleep(10) 
     # tap squares
-    do_tap(105, 542)
+#    do_tap(105, 542)
     #Put Code
-    do_input_text(CODE)
+#    do_input_text(CODE)
     # tap continue
-    do_tap(376, 1068)
+#   do_tap(376, 1068)
 
-def do_payment():
+#def do_payment():
     # -- First Screen --
     # tap email field
-    do_tap(322, 836)
+#    do_tap(322, 836)
     # Enter email address
-    do_input_text(MOCK_EMAIL)
+#    do_input_text(MOCK_EMAIL)
     # tap continue
-    do_tap(375, 1006)
+#    do_tap(375, 1006)
     # verify it's you
-    do_tap(690, 577)
+#    do_tap(690, 577)
     # tap squares
-    do_tap(105, 542)
+#    do_tap(105, 542)
     #Sleep
-    do_sleep(10) 
+#    do_sleep(10) 
     # tap squares
-    do_tap(105, 542)
+#    do_tap(105, 542)
     #Put Code
-    do_input_text(CODE)
+#    do_input_text(CODE)
     # tap continue
-    do_tap(376, 1068)
+#    do_tap(376, 1068)
     #Sleep
-    do_sleep(3) 
+#    do_sleep(3) 
     # tap account
-    do_tap(632, 1085)
+#    do_tap(632, 1085)
     #Sleep
-    do_sleep(2) 
+#    do_sleep(2) 
     # tap payment method
-    do_tap(310, 721)
+#    do_tap(310, 721)
     #Sleep
-    do_sleep(3) 
+#    do_sleep(3) 
     # tap add credit card
-    do_tap(372, 608)
+#    do_tap(372, 608)
     #Sleep
-    do_sleep(3) 
+#    do_sleep(3) 
     # tap card number 
-    do_tap(154, 365)
+#    do_tap(154, 365)
     # Enter card number
-    do_input_text(MOCK_CARD_NUMBER)
+#    do_input_text(MOCK_CARD_NUMBER)
     # tap Expiration Date  
-    do_tap(194, 828)
+#    do_tap(194, 828)
     # tap Expiration Date  
-    do_tap(64, 873)
+#    do_tap(64, 873)
     #Put digits
-    do_input_text(MOCK_EXPIRATION_DATE)
+#    do_input_text(MOCK_EXPIRATION_DATE)
     # Save card Button  
-    do_tap(360, 1161)
+#    do_tap(360, 1161)
     #Sleep
-    do_sleep(2) 
+#    do_sleep(2) 
     # Save card Button  
-    do_tap(365, 1164)
+#    do_tap(365, 1164)
 
 
 # Main execution
