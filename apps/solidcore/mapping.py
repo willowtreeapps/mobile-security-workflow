@@ -10,7 +10,7 @@ MOCK_FIRST_NAME = os.getenv("MOCK_FIRST_NAME")
 MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
 MOCK_EMAIL = os.getenv("MOCK_EMAIL")
 MOCK_PHONE = os.getenv("MOCK_PHONE")
-CODE = os.getenv("000000")
+MOCK_CODE = os.getenv("MOCK_CODE")
 MOCK_NUMBER = os.getenv("MOCK_NUMBER")
 DATE_YEAR = os.getenv("DATE_YEAR")
 MOCK_CARD_NUMBER = os.getenv("MOCK_CARD_NUMBER")
@@ -42,8 +42,10 @@ def do_create():
     do_sleep(10) 
     # tap squares
     do_tap(105, 542)
+    # tap squares
+    do_tap(105, 542)
     #Put Code
-    do_input_text(CODE)
+    do_input_text(MOCK_CODE)
     # tap continue
     do_tap(376, 1068)
     #Sleep
