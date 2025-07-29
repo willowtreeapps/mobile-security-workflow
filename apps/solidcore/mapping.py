@@ -43,7 +43,7 @@ def do_create():
     # tap squares
     do_tap(105, 542)
     #Put Code
-    do_input_text(CODE)
+    do_input_text(MOCK_CODE)
     # tap continue
     do_tap(376, 1068)
     #Sleep
@@ -57,7 +57,7 @@ def do_create():
     # Enter Cell Phone
     do_tap(352, 775)
     #Cell phone input
-    do_input_text(NUMBER)
+    do_input_text(MOCK_NUMBER)
     # tap First Name
     do_tap(123, 1006)
     # input name
