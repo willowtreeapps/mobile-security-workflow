@@ -3,16 +3,13 @@ import subprocess
 import time
 
 """
-
 This file centralizes all the inputs and actions used to
-intaract with the mobile device.
-
+interact with the mobile device.
 """
 
 def execute_command(command):
     try:                 
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE ,stderr=subprocess.PIPE, text=True)             
-
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)             
         output, error = process.communicate()
 
         if error:
@@ -24,8 +21,7 @@ def execute_command(command):
         print(f"Error executing command: {e}")
         print("Error Output:", e.stderr)
 
-
-# -     Perform a Tap on the Device Based on X and Y Coordinades    -
+# -     Perform a Tap on the Device Based on X and Y Coordinates    -
 def do_tap(x, y):    
     execute_command(f"adb shell input tap {x} {y}")
     do_sleep(8)
@@ -53,7 +49,18 @@ def do_back():
 def do_close(package):
     execute_command(f"adb shell am force-stop {package}")
 
-# -    Scroll down the screen a bit
-def do_scroll_down():
-    execute_command("adb shell input swipe 384 800 384 300")
+# -    Scroll down the screen with customizable parameters
+def do_scroll_down(command=None):
+    """
+    Performs a scroll down action using ADB command
+    Args:
+        command (str, optional): Custom ADB swipe command. 
+                               Defaults to a standard scroll from 384 800 to 384 300
+    """
+    if command is None:
+        # Use default scroll parameters
+        command = "adb shell input swipe 384 800 384 300"
+    
+    execute_command(command)
+    do_sleep(2)  # Add a small delay after scrolling to ensure animation completes
     
