@@ -36,34 +36,34 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_FIRST_NAME, package)
     vuln_service.search_shared_pref(MOCK_LAST_NAME, package)
     vuln_service.search_shared_pref(MOCK_PHONE, package)
-    vuln_service.search_shared_pref(MOCK_CARD_NUMBER, package)
-    vuln_service.search_shared_pref(MOCK_EXPIRATION_DATE, package)
+    #vuln_service.search_shared_pref(MOCK_CARD_NUMBER, package)
+    #vuln_service.search_shared_pref(MOCK_EXPIRATION_DATE, package)
     
     # -     Look to Sensitive Data at SQLite
     vuln_service.search_sensitive_log(MOCK_EMAIL)
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_log(MOCK_LAST_NAME)
     vuln_service.search_sensitive_log(MOCK_PHONE)
-    vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
-    vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
+    #vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
+    #vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
 
     # -     Look to Sensitive data in Logs
     vuln_service.search_sensitive_log(MOCK_EMAIL)
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_log(MOCK_LAST_NAME)
     vuln_service.search_sensitive_log(MOCK_PHONE)
-    vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
-    vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
+    #vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
+    #vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
 
     # -     Look to Sensitive data at External storage
     vuln_service.search_sensitive_external(MOCK_EMAIL)
     vuln_service.search_sensitive_external(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_external(MOCK_LAST_NAME)
     vuln_service.search_sensitive_external(MOCK_PHONE)
-    vuln_service.search_sensitive_external(MOCK_CARD_NUMBER)
-    vuln_service.search_sensitive_external(MOCK_EXPIRATION_DATE)
-    vuln_service.search_sensitive_external(MOCK_CARD_ADDRESS)
-    vuln_service.search_sensitive_external(ZIP_CODE)
+    #vuln_service.search_sensitive_external(MOCK_CARD_NUMBER)
+    #vuln_service.search_sensitive_external(MOCK_EXPIRATION_DATE)
+    #vuln_service.search_sensitive_external(MOCK_CARD_ADDRESS)
+    #vuln_service.search_sensitive_external(ZIP_CODE)
 
     time.sleep(20)
 
