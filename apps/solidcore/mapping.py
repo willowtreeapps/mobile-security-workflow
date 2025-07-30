@@ -76,13 +76,13 @@ def do_create():
     do_input_text(MOCK_LAST_NAME)
     # Tap Date Field
     do_tap(120, 794)
-    #Tap Year selection
-    do_tap(540, 552)
-    do_tap(540, 552)
-    do_tap(540, 552)
     #Sleep
     do_sleep(20) 
    
+    #Tap Year selection
+    #do_tap(540, 552)
+    #do_tap(540, 552)
+    #do_tap(540, 552)
     # Enter Date Year
     #do_input_text(DATE_YEAR)
     #Select Ok
