@@ -27,11 +27,8 @@ def do_tap(x, y):
     do_sleep(8)
 
 # -     Send input text to text fields     -
-def do_input_text(data):
-    # Escape spaces and special characters
-    escaped_data = data.replace(' ', '%s').replace('&', '\\&').replace('<', '\\<').replace('>', '\\>').replace('(', '\\(').replace(')', '\\)').replace('|', '\\|').replace(';', '\\;').replace('$', '\\$').replace('`', '\\`').replace('\\', '\\\\').replace('"', '\\"')
-    execute_command(f'adb shell input text "{escaped_data}"')
-    do_sleep(1)  # Add a small delay after input
+def do_input_text(data):        
+    execute_command(f"adb shell input text {data}")
 
 def do_sleep(amount):
     time.sleep(amount)
