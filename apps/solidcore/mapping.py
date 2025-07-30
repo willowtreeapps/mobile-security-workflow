@@ -78,9 +78,13 @@ def do_create():
     do_tap(540, 552)
     do_tap(540, 552)
     do_tap(540, 552)
+    #Sleep
+    do_sleep(20) 
+   
     # Enter Date Year
-    do_input_text(DATE_YEAR)
+    #do_input_text(DATE_YEAR)
     #Select Ok
+
     do_tap(547,812)
     # Tap Gender Field
     do_tap(689,988)
