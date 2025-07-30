@@ -34,12 +34,14 @@ def do_create():
     do_tap(375, 1006)
     # verify it's you
     do_tap(690, 577)
+   
     # tap squares
-    do_tap(93, 543)
+    #do_tap(93, 543)
     # tap squares
-    do_tap(93, 543)
+    #do_tap(93, 543)
+   
     #Sleep
-    do_sleep(20) 
+    do_sleep(25) 
    
     # tap squares
     #do_tap(105, 542)
