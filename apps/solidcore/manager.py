@@ -18,6 +18,8 @@ def do_test(package):
     MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
     MOCK_EMAIL = os.getenv("MOCK_EMAIL")
     MOCK_PHONE = os.getenv("MOCK_PHONE")
+    MOCK_ZIPCODE = os.getenv("ZIP_CODE")
+    MOCK_ADDRESS = os.getenv("MOCK_ADDRESS")
 
     # -     Open the App     -
     do_open(package)    
@@ -36,6 +38,8 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_FIRST_NAME, package)
     vuln_service.search_shared_pref(MOCK_LAST_NAME, package)
     vuln_service.search_shared_pref(MOCK_PHONE, package)
+    vuln_service.search_sensitive_log(ZIP_CODE)
+    vuln_service.search_sensitive_log(MOCK_ADDRESS)
     #vuln_service.search_shared_pref(MOCK_CARD_NUMBER, package)
     #vuln_service.search_shared_pref(MOCK_EXPIRATION_DATE, package)
     
@@ -44,6 +48,8 @@ def do_test(package):
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_log(MOCK_LAST_NAME)
     vuln_service.search_sensitive_log(MOCK_PHONE)
+    vuln_service.search_sensitive_log(ZIP_CODE)
+    vuln_service.search_sensitive_log(MOCK_ADDRESS)
     #vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
     #vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
 
@@ -52,6 +58,8 @@ def do_test(package):
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_log(MOCK_LAST_NAME)
     vuln_service.search_sensitive_log(MOCK_PHONE)
+    vuln_service.search_sensitive_log(ZIP_CODE)
+    vuln_service.search_sensitive_log(MOCK_ADDRESS)
     #vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
     #vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
 
@@ -60,6 +68,8 @@ def do_test(package):
     vuln_service.search_sensitive_external(MOCK_FIRST_NAME)
     vuln_service.search_sensitive_external(MOCK_LAST_NAME)
     vuln_service.search_sensitive_external(MOCK_PHONE)
+    vuln_service.search_sensitive_log(ZIP_CODE)
+    vuln_service.search_sensitive_log(MOCK_ADDRESS)
     #vuln_service.search_sensitive_external(MOCK_CARD_NUMBER)
     #vuln_service.search_sensitive_external(MOCK_EXPIRATION_DATE)
     #vuln_service.search_sensitive_external(MOCK_CARD_ADDRESS)
