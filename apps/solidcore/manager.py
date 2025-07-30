@@ -18,7 +18,7 @@ def do_test(package):
     MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
     MOCK_EMAIL = os.getenv("MOCK_EMAIL")
     MOCK_PHONE = os.getenv("MOCK_PHONE")
-    MOCK_ZIPCODE = os.getenv("ZIP_CODE")
+    ZIP_CODE = os.getenv("ZIP_CODE")
     MOCK_ADDRESS = os.getenv("MOCK_ADDRESS")
 
     # -     Open the App     -
