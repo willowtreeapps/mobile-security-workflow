@@ -43,7 +43,9 @@ jobs:
           MOCK_CARD_NUMBER: ${{vars.MOCK_CARD_NUMBER}}
           MOCK_EXPIRATION_DATE: ${{vars.MOCK_EXPIRATION_DATE}}
           MOCK_CARD_ADDRESS: ${{vars.MOCK_CARD_ADDRESS}}
-          
+          MOCK_ADDRESS: ${{vars.MOCK_ADDRESS}}
+          ZIP_CODE: ${{vars.ZIP_CODE}}
+
       - name: Upload SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
