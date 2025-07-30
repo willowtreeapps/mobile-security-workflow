@@ -28,8 +28,8 @@ def do_test(package):
 
     #-       do login/create
     solidcore.do_create()
-    solidcore.do_login()
-    solidcore.do_payment()
+    #solidcore.do_login()
+    #solidcore.do_payment()
 
     # -     Search for Vulnerabilities at Shared pref 
     vuln_service.search_shared_pref(MOCK_EMAIL, package)
