@@ -15,8 +15,8 @@ MOCK_NUMBER = os.getenv("MOCK_NUMBER")
 #DATE_YEAR = os.getenv("DATE_YEAR")
 #MOCK_CARD_NUMBER = os.getenv("MOCK_CARD_NUMBER")
 #MOCK_EXPIRATION_DATE = os.getenv("MOCK_EXPIRATION_DATE")
-#MOCK_CARD_ADDRESS = os.getenv("MOCK_CARD_ADDRESS")
-#ZIP_CODE = os.getenv("77449")
+MOCK_CARD_ADDRESS = os.getenv("MOCK_CARD_ADDRESS")
+ZIP_CODE = os.getenv("77449")
 
 """"
    Application: Solidcore
@@ -103,7 +103,7 @@ def do_create():
     # Select Street Adress
     do_tap(270, 533)
     # Enter Adress
-    do_input_text("6519 Amberfield Ln")
+    do_input_text(MOCK_CARD_ADDRESS)
     # Select City
     do_tap(114, 932)
     # Enter City
