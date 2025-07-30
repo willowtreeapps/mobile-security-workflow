@@ -39,19 +39,21 @@ def do_create():
     # tap squares
     do_tap(93, 543)
     #Sleep
-    do_sleep(10) 
+    do_sleep(20) 
+   
     # tap squares
-    do_tap(105, 542)
+    #do_tap(105, 542)
     # tap squares
-    do_tap(105, 542)
+    #do_tap(105, 542)
     #Put Code
-    do_input_text(MOCK_CODE)
+    #do_input_text(MOCK_CODE)
     # tap continue
-    do_tap(376, 1068)
+    #do_tap(376, 1068)
     #Sleep
-    do_sleep(8) 
+    #do_sleep(8) 
     # tap continue
-    do_tap(376, 1068)
+    #do_tap(376, 1068)
+   
     # Select California
     do_tap(119, 575)
     # tap continue
