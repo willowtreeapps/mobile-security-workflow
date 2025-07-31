@@ -38,8 +38,8 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_FIRST_NAME, package)
     vuln_service.search_shared_pref(MOCK_LAST_NAME, package)
     vuln_service.search_shared_pref(MOCK_PHONE, package)
-    vuln_service.search_shared_pref(ZIP_CODE)
-    vuln_service.search_shared_pref(MOCK_ADDRESS)
+    vuln_service.search_shared_pref(ZIP_CODE, package)
+    vuln_service.search_shared_pref(MOCK_ADDRESS, package)
     #vuln_service.search_shared_pref(MOCK_CARD_NUMBER, package)
     #vuln_service.search_shared_pref(MOCK_EXPIRATION_DATE, package)
     
