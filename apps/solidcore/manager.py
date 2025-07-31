@@ -44,12 +44,12 @@ def do_test(package):
     #vuln_service.search_shared_pref(MOCK_EXPIRATION_DATE, package)
     
     # -     Look to Sensitive Data at SQLite
-    vuln_service.search_sensitive_sqlite(MOCK_EMAIL)
-    vuln_service.search_sensitive_sqlite(MOCK_FIRST_NAME)
-    vuln_service.search_sensitive_sqlite(MOCK_LAST_NAME)
-    vuln_service.search_sensitive_sqlite(MOCK_PHONE)
-    vuln_service.search_sensitive_sqliteg(ZIP_CODE)
-    vuln_service.search_sensitive_sqlite(MOCK_ADDRESS)
+    vuln_service.search_sensitive_log(MOCK_EMAIL)
+    vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
+    vuln_service.search_sensitive_log(MOCK_LAST_NAME)
+    vuln_service.search_sensitive_log(MOCK_PHONE)
+    vuln_service.search_sensitive_log(ZIP_CODE)        
+    vuln_service.search_sensitive_log(MOCK_ADDRESS)
     #vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
     #vuln_service.search_sensitive_log(MOCK_EXPIRATION_DATE)
 
