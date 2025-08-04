@@ -151,6 +151,7 @@ def do_login():
    do_tap(391, 1070)
    
    do_sleep(20)
+   
 
 #def do_payment():
     # -- First Screen --

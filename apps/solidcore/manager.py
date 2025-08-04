@@ -13,13 +13,15 @@ import time
 load_dotenv()
 
 def do_test(package):
-
+    
+    
     MOCK_FIRST_NAME = os.getenv("MOCK_FIRST_NAME")
     MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
     MOCK_EMAIL = os.getenv("MOCK_EMAIL")
     MOCK_PHONE = os.getenv("MOCK_PHONE")
     ZIP_CODE = os.getenv("ZIP_CODE")
     MOCK_ADDRESS = os.getenv("MOCK_ADDRESS")
+    MOCK_CARD_NUMBER = os.getenv("MOCK_CARD_NUMBER")
 
     # -     Open the App     -
     do_open(package)    
@@ -27,10 +29,13 @@ def do_test(package):
     # -     Root and Emulator checks
     vuln_service.check_root(package)
     vuln_service.check_emulator(package)
+    
+    time.sleep(20)
+
 
     #-       do login/create
     #solidcore.do_create()
-    solidcore.do_login()
+    #solidcore.do_login()
     #solidcore.do_payment()
 
     # -     Search for Vulnerabilities at Shared pref 
@@ -40,6 +45,7 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_PHONE, package)
     vuln_service.search_shared_pref(ZIP_CODE, package)
     vuln_service.search_shared_pref(MOCK_ADDRESS, package)
+    vuln_service.search_shared_pref(MOCK_CARD_NUMBER, package)
  
     # -     Look to Sensitive Data at SQLite
     vuln_service.search_sqlite(MOCK_EMAIL, package)
@@ -48,6 +54,7 @@ def do_test(package):
     vuln_service.search_sqlite(MOCK_PHONE, package)
     vuln_service.search_sqlite(ZIP_CODE, package)        
     vuln_service.search_sqlite(MOCK_ADDRESS, package)
+    vuln_service.search_sqlite(MOCK_CARD_NUMBER, package)
    
 
     # -     Look to Sensitive data in Logs
@@ -57,6 +64,7 @@ def do_test(package):
     vuln_service.search_sensitive_log(MOCK_PHONE)
     vuln_service.search_sensitive_log(ZIP_CODE)
     vuln_service.search_sensitive_log(MOCK_ADDRESS)
+    vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
   
 
     # -     Look to Sensitive data at External storage
@@ -66,6 +74,7 @@ def do_test(package):
     vuln_service.search_sensitive_external(MOCK_PHONE)
     vuln_service.search_sensitive_external(ZIP_CODE)
     vuln_service.search_sensitive_external(MOCK_ADDRESS)
+    vuln_service.search_sensitive_external(MOCK_CARD_NUMBER)
 
     time.sleep(20)
 
