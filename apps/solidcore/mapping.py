@@ -144,7 +144,7 @@ def do_login():
     #tap squares
    do_tap(93, 543)
     #Put Code
-   do_input_text(MOCK_CODE) #@todo fix
+   do_input_text(MOCK_CODE)
     #tap continue
    do_tap(376, 1068)
 
