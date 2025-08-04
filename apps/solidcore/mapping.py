@@ -148,7 +148,9 @@ def do_login():
    
    do_sleep(4)
     #tap continue
-   do_tap(384, 1088)
+   do_tap(378, 1161)
+   
+   do_sleep(20)
 
 #def do_payment():
     # -- First Screen --
