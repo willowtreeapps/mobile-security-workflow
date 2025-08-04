@@ -42,12 +42,12 @@ def do_test(package):
     vuln_service.search_shared_pref(MOCK_ADDRESS, package)
  
     # -     Look to Sensitive Data at SQLite
-    vuln_service.search_sqlite(MOCK_EMAIL)
-    vuln_service.search_sqlite(MOCK_FIRST_NAME)
-    vuln_service.search_sqlite(MOCK_LAST_NAME)
-    vuln_service.search_sqlite(MOCK_PHONE)
-    vuln_service.search_sqlite(ZIP_CODE)        
-    vuln_service.search_sqlite(MOCK_ADDRESS)
+    vuln_service.search_sqlite(MOCK_EMAIL, package)
+    vuln_service.search_sqlite(MOCK_FIRST_NAME, package)
+    vuln_service.search_sqlite(MOCK_LAST_NAME, package)
+    vuln_service.search_sqlite(MOCK_PHONE, package)
+    vuln_service.search_sqlite(ZIP_CODE, package)        
+    vuln_service.search_sqlite(MOCK_ADDRESS, package)
    
 
     # -     Look to Sensitive data in Logs
