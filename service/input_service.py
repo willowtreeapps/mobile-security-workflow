@@ -24,7 +24,7 @@ def execute_command(command):
 # -     Perform a Tap on the Device Based on X and Y Coordinates    -
 def do_tap(x, y):    
     execute_command(f"adb shell input tap {x} {y}")
-    do_sleep(8)
+    do_sleep(8) 
 
 # -     Send input text to text fields     -
 def do_input_text(data):        
