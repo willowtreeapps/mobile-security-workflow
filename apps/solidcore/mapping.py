@@ -145,8 +145,10 @@ def do_login():
    do_tap(93, 543)
     #Put Code
    do_input_text(MOCK_CODE)
+   
+   do_sleep(4)
     #tap continue
-   do_tap(418, 1062)
+   do_tap(384, 1088)
 
 #def do_payment():
     # -- First Screen --
