@@ -145,10 +145,10 @@ def do_login():
    do_tap(93, 543)
     #Put Code
    do_input_text(MOCK_CODE)
-   
-   do_sleep(4)
     #tap continue
    do_tap(378, 1161)
+    #second tap continue (in case of glitch)
+   do_tap(391, 1070)
    
    do_sleep(20)
 
