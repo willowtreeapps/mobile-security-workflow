@@ -10,7 +10,7 @@ MOCK_FIRST_NAME = os.getenv("MOCK_FIRST_NAME")
 MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
 MOCK_EMAIL = os.getenv("MOCK_EMAIL")
 MOCK_PHONE = os.getenv("MOCK_PHONE")
-#MOCK_CODE = os.getenv("MOCK_CODE")
+MOCK_CODE = os.getenv("MOCK_CODE")
 MOCK_NUMBER = os.getenv("MOCK_NUMBER")
 #DATE_YEAR = os.getenv("DATE_YEAR")
 #MOCK_CARD_NUMBER = os.getenv("MOCK_CARD_NUMBER")
@@ -23,7 +23,6 @@ ZIP_CODE = os.getenv("77449")
    Application: Solidcore
    This file maps the relevant flows of the application
 """
-
 
 def do_create():
     # -- First Screen --
@@ -132,28 +131,26 @@ def do_create():
     # Select Complete Sign Up
     do_tap(366, 1124)
 
-#def do_login():
-     # -- First Screen --
-    # tap email field
-#    do_tap(322, 836)
-    # Enter email address
-#    do_input_text(MOCK_EMAIL)
-    # tap continue
-#    do_tap(375, 1006)
-    # verify it's you
-#    do_tap(690, 577)
-    # tap squares
-#    do_tap(93, 543)
-    # tap squares
-#    do_tap(93, 543)
-    #Sleep
-#    do_sleep(10) 
-    # tap squares
-#    do_tap(105, 542)
+def do_login():
+    #-- First Screen --
+    #tap email field
+   do_tap(322, 836)
+    #Enter email address
+   do_input_text(MOCK_EMAIL)
+    #tap continue
+   do_tap(375, 1006)
+    #verify it's you
+   do_tap(690, 577)
+    #tap squares
+   do_tap(93, 543)
+    #tap squares
+   do_tap(93, 543)
+    #tap squares
+   do_tap(105, 542)
     #Put Code
-#    do_input_text(CODE)
-    # tap continue
-#   do_tap(376, 1068)
+   do_input_text(MOCK_CODE)
+    #tap continue
+   do_tap(376, 1068)
 
 #def do_payment():
     # -- First Screen --

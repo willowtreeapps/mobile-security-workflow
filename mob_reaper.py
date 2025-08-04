@@ -30,7 +30,7 @@ def do_test():
     
     print(f"[+] Initiating tests on: {PACKAGE_NAME}")
 
-   # helper.set_proxy(PROXY_HOST, PROXY_PORT)
+    helper.set_proxy(PROXY_HOST, PROXY_PORT)
     helper.start_webhook()
 
     match PACKAGE_NAME:
