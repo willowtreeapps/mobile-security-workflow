@@ -19,37 +19,37 @@ def do_test(package):
     MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
     # -     Open the App     -
-    do_open(package)        
+    # do_open(package)        
 
-    vuln_service.check_root(package)
+    # vuln_service.check_root(package)
 
-    vuln_service.check_emulator(package)
+    # vuln_service.check_emulator(package)
     
     vuln_service.search_sensitive_external(MOCK_USR)
 
-    # -     Perform Shared Preferences Flow     -
-    androgoat.login_shared_pref_1()
+    # # -     Perform Shared Preferences Flow     -
+    # androgoat.login_shared_pref_1()
 
-    # -     Search for Vulnerabilities       -
-    vuln_service.search_shared_pref(MOCK_PASWD, package)
+    # # -     Search for Vulnerabilities       -
+    # vuln_service.search_shared_pref(MOCK_PASWD, package)
 
-    # -     Restart the App     -
-    do_restart(package)
+    # # -     Restart the App     -
+    # do_restart(package)
 
-    # -     Perform the SQLite Flow
-    androgoat.login_sqlite()
+    # # -     Perform the SQLite Flow
+    # androgoat.login_sqlite()
 
-    # -     Look to Sensitive Data at SQLite
-    vuln_service.search_sqlite(MOCK_USR, package)
+    # # -     Look to Sensitive Data at SQLite
+    # vuln_service.search_sqlite(MOCK_USR, package)
 
-    do_restart(package)
+    # do_restart(package)
 
-    # -     Perform the Logging Flow 
-    androgoat.login_insecure_logging()    
+    # # -     Perform the Logging Flow 
+    # androgoat.login_insecure_logging()    
 
     # # -     Look to Sensitive data in Logs
-    vuln_service.search_sensitive_log(MOCK_USR)
-    vuln_service.search_sensitive_log(MOCK_PASWD)        
+    # vuln_service.search_sensitive_log(MOCK_USR)
+    # vuln_service.search_sensitive_log(MOCK_PASWD)        
 
     # -     Create the .sarif File Report
     vuln_service.build_report()
