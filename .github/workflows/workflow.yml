@@ -8,7 +8,7 @@ on:
 
 jobs:
   run_python_script:
-    runs-on: self-hosted
+    runs-on: [self-hosted, mob-reaper]
 
     permissions:
       contents: read
