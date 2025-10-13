@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 import os
 import sys
 
-
 """"
 
     Main file. Responsible for centralize all the supported applications
