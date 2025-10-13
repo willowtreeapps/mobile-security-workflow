@@ -4,6 +4,8 @@ from service import vulnerability_service as vuln_service
 from apps.andro_goat import mapping as androgoat
 import os
 
+import time
+
 """"
 
     Androgoat test manager file. All the test structure for this app
@@ -21,11 +23,13 @@ def do_test(package):
     # -     Open the App     -
     # do_open(package)        
 
-    # vuln_service.check_root(package)
+    vuln_service.check_root(package)
 
-    # vuln_service.check_emulator(package)
+    vuln_service.check_emulator(package)
     
     vuln_service.search_sensitive_external(MOCK_USR)
+    
+    time.sleep(20)
 
     # # -     Perform Shared Preferences Flow     -
     # androgoat.login_shared_pref_1()
