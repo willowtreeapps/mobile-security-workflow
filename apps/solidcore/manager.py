@@ -12,8 +12,7 @@ import time
 
 load_dotenv()
 
-def do_test(package):
-    
+def do_test(package):    
     
     MOCK_FIRST_NAME = os.getenv("MOCK_FIRST_NAME")
     MOCK_LAST_NAME = os.getenv("MOCK_LAST_NAME")
@@ -31,7 +30,6 @@ def do_test(package):
     vuln_service.check_emulator(package)
     
     time.sleep(20)
-
 
     #-       do login/create
     #solidcore.do_create()
@@ -56,7 +54,6 @@ def do_test(package):
     vuln_service.search_sqlite(MOCK_ADDRESS, package)
     vuln_service.search_sqlite(MOCK_CARD_NUMBER, package)
    
-
     # -     Look to Sensitive data in Logs
     vuln_service.search_sensitive_log(MOCK_EMAIL)
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)
@@ -66,7 +63,6 @@ def do_test(package):
     vuln_service.search_sensitive_log(MOCK_ADDRESS)
     vuln_service.search_sensitive_log(MOCK_CARD_NUMBER)
   
-
     # -     Look to Sensitive data at External storage
     vuln_service.search_sensitive_external(MOCK_EMAIL)
     vuln_service.search_sensitive_external(MOCK_FIRST_NAME)
