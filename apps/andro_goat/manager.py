@@ -21,7 +21,7 @@ def do_test(package):
     MOCK_PASWD = os.getenv("MOCK_PASSWORD")
 
     # -     Open the App     -
-    # do_open(package)        
+    do_open(package)        
 
     vuln_service.check_root(package)
 
