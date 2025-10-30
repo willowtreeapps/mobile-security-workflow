@@ -37,7 +37,10 @@ class HttpHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b'{"status": "received"}')
 
                 if self.path == '/vulnerability/ssl':
-                    vul_service.create_ssl_vul(data)                
+                    vul_service.create_ssl_vul(data)
+                    
+                else:
+                    vul_service.create_generic_vul(data)      
 
             except json.JSONDecodeError:
                 self.send_response(400)
