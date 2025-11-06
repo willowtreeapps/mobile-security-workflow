@@ -40,6 +40,7 @@ class HttpHandler(BaseHTTPRequestHandler):
                     vul_service.create_ssl_vul(data)
                     
                 else:
+                    data = json.loads(data)
                     for vulnerability in data:
                         vul_service.create_generic_vul(vulnerability)      
 
