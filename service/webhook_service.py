@@ -40,7 +40,8 @@ class HttpHandler(BaseHTTPRequestHandler):
                     vul_service.create_ssl_vul(data)
                     
                 else:
-                    vul_service.create_generic_vul(data)      
+                    for vulnerability in data:
+                        vul_service.create_generic_vul(vulnerability)      
 
             except json.JSONDecodeError:
                 self.send_response(400)
