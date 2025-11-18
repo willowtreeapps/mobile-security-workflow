@@ -51,3 +51,14 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ./results.sarif
+
+      - name: Upload results as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-scan-results
+          path: |
+            results.sarif
+            *.json
+            *.log
+          retention-days: 30
