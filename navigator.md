@@ -395,3 +395,4 @@ Priorities (in order):
 4. Context awareness - avoid loops and redundant actions
 5. Self-correction - detect and fix failed taps
 6. Graceful failure
+7. Always mask sensitive data in logs (eg; email adress, password, PII) perform an asteriscs masking
