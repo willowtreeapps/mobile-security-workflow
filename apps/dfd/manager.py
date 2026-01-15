@@ -30,7 +30,7 @@ def do_test(package):
     vuln_service.check_emulator(package)
     
     # -     Give the pentester some time to chat a bit (3 minutes)   -
-    time.sleep(180)
+    time.sleep(160)
     
     vuln_service.search_sensitive_external(MOCK_USR)        
 
@@ -43,9 +43,12 @@ def do_test(package):
   
 
     # -     Look to Sensitive data in Logs
+    vuln_service.search_sensitive_log(MOCK_PASWD)  
     vuln_service.search_sensitive_log(MOCK_FIRST_NAME)    
-    vuln_service.search_sensitive_log(MOCK_EMAIL)
-    vuln_service.search_sensitive_log(MOCK_PASWD)        
+    vuln_service.search_sensitive_log(MOCK_EMAIL)     
+    
+    
+    time.sleep(10)    
 
     # -     Create the .sarif File Report
     vuln_service.build_report()
