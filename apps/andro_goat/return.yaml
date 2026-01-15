@@ -1,0 +1,25 @@
+{
+
+    "isCoordinate":true,
+    "X": 323,
+    "Y": 211,
+    "isInput":false,
+    "isEnd":false,
+    "scrollData": {
+      "position": "up", -- // optional field - enum of (up|down)
+    },
+    "inputDataType":"email", -- // enum of (email|password|firstname|lastname|address|phone|id|username)
+    
+}
+
+
+
+
+// --- Explanation --
+// We will iterate throug every screenshot
+// asking for the data, if is a coordinate - we do tap
+// if is a input we do tap and enter the data
+// we check for the inputdataType to decide wich kind of data 
+// will be sent.
+// if isEnd is true. We do wrap up and finish the test
+// 
