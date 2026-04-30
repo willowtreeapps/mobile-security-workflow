@@ -1,96 +1,57 @@
-# Byte-compiled / optimized / DLL files
+# Credentials — never commit
+.env
+.env.*
+!.env-sample
+
+# Pulled APKs — large binaries, app-specific
+apks/
+
+jadx-mcp-server/
+
+# Session evidence — contains sensitive findings, PII, credentials in plaintext
+evidence/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# C extensions
-*.so
-
-# Virtual environments
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
 venv/
 env/
-.venv/
-.env/
+ENV/
 
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
-.eggs/
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-coverage.xml
-*.cover
-*.py,cover
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pyright
-.pyright/
-
-# Pytest
-.cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IDEs and editors
-.vscode/
+# ── Editor / IDE ──────────────────────────────────────────────────────────────
 .idea/
-*.sublime-project
-*.sublime-workspace
+.vscode/
+*.swp
+*.swo
+*~
 
-# MacOS
-.DS_Store
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# dotenv
-*.env
-*.env.*
-
-# SQLite
-*.sqlite3
-*.db
-
-# Logs
+# ── Frida / ADB temp files ────────────────────────────────────────────────────
+*.flow
 *.log
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Local config
-config.yaml
-
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
-# Other files and folders
-.settings/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk

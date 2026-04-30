@@ -1,0 +1,169 @@
+{
+  "_comment": "Mobile DAST findings.json — written by Claude at end of Phase 6, consumed by generate_report.py",
+  "_usage": "python3.12 generate_report.py findings.json output.pdf",
+  "_screenshot_naming": "Name screenshots <finding-id>_<description>.png (e.g. F01_shared_prefs.png) so generate_report.py auto-attaches them.",
+
+  "target": {
+    "name":            "OHLQ Dev",
+    "packageName":     "com.ohlq.app.dev",
+    "versionName":     "1.4.2",
+    "versionCode":     "142",
+    "androidVersion":  "Android 13 (API 33)",
+    "architecture":    "arm64-v8a",
+    "functionality":   "Login",
+    "startDate":       "2026-04-28",
+    "finishDate":      "2026-04-28",
+    "sessionEvidence": "/Users/cassio.junior/Desktop/mobile-dast/evidence/2026-04-28_1121_com_ohlq_app_dev"
+  },
+
+  "environment": "Development",
+  "teamName":    "TELUS Digital Solutions Security team",
+
+  "findings": [
+    {
+      "id":          "F-01",
+      "title":       "Sensitive Data Stored in Cleartext SharedPreferences",
+      "severity":    "High",
+      "confidence":  "Confirmed",
+      "masvs":       "MASVS-STORAGE / S-1",
+      "mastgTest":   "MASTG-TEST-0001 — Testing Local Storage for Sensitive Data",
+      "cwe":         "CWE-312 — Cleartext Storage of Sensitive Information",
+      "status":      "open",
+      "description": "After a successful login the application writes the session bearer token and the authenticated user's email address in plaintext to the Android SharedPreferences store (com.ohlq.app.dev_preferences.xml). Any process with READ_EXTERNAL_STORAGE or a root shell can trivially read these values, enabling full account takeover without knowledge of the user's password.",
+      "evidence": [
+        {
+          "title":   "SharedPreferences file contents",
+          "command": "adb -s 127.0.0.1:6555 shell \"run-as com.ohlq.app.dev cat /data/data/com.ohlq.app.dev/shared_prefs/com.ohlq.app.dev_preferences.xml\"",
+          "output":  "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map>\n    <string name=\"auth_token\">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.[REDACTED:PASSWORD]</string>\n    <string name=\"user_email\">[REDACTED:EMAIL]</string>\n    <string name=\"session_id\">sess_9a2f3b...</string>\n</map>"
+        },
+        {
+          "title":        "Frida hook — token written at runtime",
+          "fridaLogExcerpt": "[PREFS] putString(auth_token, eyJhbGciOiJI...)\n[PREFS] putString(user_email, [REDACTED:EMAIL])",
+          "screenshotPath": "/Users/cassio.junior/Desktop/mobile-dast/evidence/2026-04-28_1121_com_ohlq_app_dev/screenshots/F01_shared_prefs.png"
+        },
+        {
+          "title":      "Source reference (jadx)",
+          "jadxSource": "// com.ohlq.auth.SessionManager#persistSession (line 87)\nSharedPreferences prefs = context.getSharedPreferences(\"com.ohlq.app.dev_preferences\", Context.MODE_PRIVATE);\nprefs.edit()\n    .putString(\"auth_token\", token)\n    .putString(\"user_email\", email)\n    .apply();"
+        }
+      ],
+      "remediation": "Replace SharedPreferences with EncryptedSharedPreferences (AndroidX Security Crypto) backed by an Android KeyStore key. Reference: https://developer.android.com/topic/security/data",
+      "references": [
+        "https://developer.android.com/topic/security/data",
+        "https://mas.owasp.org/MASTG/tests/android/MASVS-STORAGE/MASTG-TEST-0001/"
+      ]
+    },
+
+    {
+      "id":          "F-02",
+      "title":       "Missing Certificate Pinning",
+      "severity":    "High",
+      "confidence":  "Confirmed",
+      "masvs":       "MASVS-NETWORK / N-2",
+      "mastgTest":   "MASTG-TEST-0019 — Testing the TLS Settings",
+      "cwe":         "CWE-295 — Improper Certificate Validation",
+      "status":      "open",
+      "description": "All HTTPS traffic between the application and its backend API is visible in plaintext through a standard mitmproxy interception (no bypass required). The application does not implement certificate pinning, allowing a network-level attacker to perform a MitM attack and intercept or tamper with authenticated requests including session tokens and personal data.",
+      "evidence": [
+        {
+          "title":   "mitmproxy capturing authenticated request without SSL bypass",
+          "command": "mitmdump -r /tmp/capture.flow --flow-detail 3 2>/dev/null | grep -A 20 'Host: api.ohlq'",
+          "output":  "GET /api/v1/user/profile HTTP/2.0\nHost: api.ohlq.com\nAuthorization: Bearer eyJhbGciOiJI...[REDACTED]\nContent-Type: application/json\n\nHTTP/2.0 200 OK\n{\"email\":\"[REDACTED:EMAIL]\",\"name\":\"Test User\",...}"
+        },
+        {
+          "title":          "mitmproxy UI showing decrypted traffic",
+          "screenshotPath": "/Users/cassio.junior/Desktop/mobile-dast/evidence/2026-04-28_1121_com_ohlq_app_dev/screenshots/F02_mitm_traffic_visible.png"
+        }
+      ],
+      "remediation": "Implement certificate pinning via OkHttp's CertificatePinner or a network_security_config.xml <pin-set> block. Use public-key pins (SPKI), not certificate pins, to survive certificate renewals. Reference: https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning",
+      "references": [
+        "https://mas.owasp.org/MASTG/tests/android/MASVS-NETWORK/MASTG-TEST-0019/",
+        "https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning"
+      ]
+    },
+
+    {
+      "id":          "F-03",
+      "title":       "Hardcoded API Keys in Application Bundle",
+      "severity":    "High",
+      "confidence":  "Confirmed",
+      "masvs":       "MASVS-STORAGE / C-2",
+      "mastgTest":   "MASTG-TEST-0013 — Testing for Hardcoded Credentials",
+      "cwe":         "CWE-798 — Use of Hard-coded Credentials",
+      "status":      "open",
+      "description": "The application bundle contains hardcoded API keys for Braze (push notifications), Firebase (analytics), and Google Maps. These keys are embedded in the compiled APK and are trivially extractable with standard reverse-engineering tools. An attacker can use these keys to send unauthorized push notifications, access analytics data, or incur billing charges.",
+      "evidence": [
+        {
+          "title":   "Keys extracted from APK strings",
+          "command": "unzip -p /Users/cassio.junior/Desktop/mobile-dast/apks/com.ohlq.app.dev.apk assets/index.android.bundle | strings | grep -iE '(braze|firebase|maps|api[_-]?key)'",
+          "output":  "BRAZE_API_KEY=ab12cd34-ef56-...\nFIREBASE_API_KEY=AIzaSy...\nGOOGLE_MAPS_API_KEY=AIzaSy..."
+        },
+        {
+          "title":      "Source reference (jadx — resources)",
+          "jadxSource": "<!-- res/values/strings.xml -->\n<string name=\"braze_api_key\">ab12cd34-ef56-7890-abcd-ef1234567890</string>\n<string name=\"google_maps_key\">AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>"
+        }
+      ],
+      "remediation": "Rotate all exposed keys immediately. Store secrets server-side and serve them to authenticated clients via a secure API endpoint at runtime. Use Google Cloud Secret Manager or equivalent. Never embed secrets in the APK.",
+      "references": [
+        "https://mas.owasp.org/MASTG/tests/android/MASVS-STORAGE/MASTG-TEST-0013/",
+        "https://cloud.google.com/secret-manager"
+      ]
+    },
+
+    {
+      "id":          "F-04",
+      "title":       "Application Screen Exposed in Recent Apps (Missing FLAG_SECURE)",
+      "severity":    "Low",
+      "confidence":  "Confirmed",
+      "masvs":       "MASVS-STORAGE / S-6",
+      "mastgTest":   "MASTG-TEST-0006 — Testing for Sensitive Data in the Keyboard Cache",
+      "cwe":         "CWE-200 — Exposure of Sensitive Information to an Unauthorized Actor",
+      "status":      "open",
+      "description": "The application does not set FLAG_SECURE on its windows. Sensitive screens (login, account details, checkout) are visible as thumbnails in the Android Recent Apps switcher. On a shared or stolen device, another user can view these thumbnails without unlocking the application.",
+      "evidence": [
+        {
+          "title":   "FLAG_SECURE absent in window dump",
+          "command": "adb -s 127.0.0.1:6555 shell dumpsys window windows | grep -A 5 'com.ohlq.app.dev'",
+          "output":  "Window{3a4b5c6 u0 com.ohlq.app.dev/com.ohlq.MainActivity}:\n  mAttrs: flags=0x01810100 (no FLAG_SECURE / 0x00002000 bit absent)\n  ..."
+        },
+        {
+          "title":          "Recents thumbnail showing sensitive data",
+          "screenshotPath": "/Users/cassio.junior/Desktop/mobile-dast/evidence/2026-04-28_1121_com_ohlq_app_dev/screenshots/F04_recents_thumbnail.png"
+        }
+      ],
+      "remediation": "Call getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE) in onCreate() of every Activity that displays sensitive information.",
+      "references": [
+        "https://developer.android.com/reference/android/view/WindowManager.LayoutParams#FLAG_SECURE",
+        "https://mas.owasp.org/MASTG/tests/android/MASVS-STORAGE/MASTG-TEST-0006/"
+      ]
+    },
+
+    {
+      "id":          "F-05",
+      "title":       "Firebase Analytics Enabled Before User Consent",
+      "severity":    "Medium",
+      "confidence":  "Confirmed",
+      "masvs":       "MASVS-PRIVACY / Pr-4",
+      "mastgTest":   "MASTG-TEST-0060 — Testing Whether the App Contains Sensitive Data in Logs",
+      "cwe":         "CWE-359 — Exposure of Private Personal Information to an Unauthorized Actor",
+      "status":      "open",
+      "description": "The AndroidManifest.xml does not set firebase_analytics_collection_enabled to false. On first cold launch, before any consent UI is shown to the user, Firebase Analytics begins collecting device identifiers, session data, and screen events. The SharedPreferences written at first launch confirm analytics are active with consent_source: -10 (no consent recorded).",
+      "evidence": [
+        {
+          "title":   "Manifest analytics flags",
+          "command": "grep -E 'firebase_analytics|firebase_automatic|firebase_crashlytics|google_analytics' evidence/static/AndroidManifest.xml",
+          "output":  "(no matching <meta-data> entries — all flags absent, defaulting to true)"
+        },
+        {
+          "title":   "SharedPreferences confirm pre-consent collection",
+          "command": "adb -s 127.0.0.1:6555 shell \"run-as com.ohlq.app.dev cat /data/data/com.ohlq.app.dev/shared_prefs/google_app_measurement_local.xml\"",
+          "output":  "<map>\n  <long name=\"last_pause_time\" value=\"1714312800000\" />\n  <string name=\"consent_source\">-10</string>\n  <string name=\"consent_settings\">G111</string>\n</map>"
+        }
+      ],
+      "remediation": "Add <meta-data android:name=\"firebase_analytics_collection_enabled\" android:value=\"false\" /> to AndroidManifest.xml and call FirebaseAnalytics.getInstance(context).setAnalyticsCollectionEnabled(true) only after the user provides explicit consent. Reference: https://firebase.google.com/docs/analytics/configure-data-collection",
+      "references": [
+        "https://firebase.google.com/docs/analytics/configure-data-collection",
+        "https://mas.owasp.org/MASTG/tests/android/MASVS-PRIVACY/"
+      ]
+    }
+  ]
+}
