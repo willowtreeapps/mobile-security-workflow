@@ -71,6 +71,9 @@ Optional extras Claude will respect if present (do not invent them — only use 
 | `OTP`          | Static OTP for test environments that accept a fixed code                                       |
 | `PHONE`        | Phone number for SMS-based flows                                                                |
 | `API_BASE_URL` | Override for the backend host when the app talks to a staging URL                               |
+| `CARD_NUMBER`  | Payment card PAN for testing checkout / payment flows in financial apps (use test card numbers) |
+| `CARD_CVV`     | Card verification value (3–4 digits) for payment form flows                                     |
+| `CARD_EXPIRY`  | Card expiry date in `MM/YY` format for payment form flows                                       |
 | `EXTRA_*`      | Any additional `EXTRA_<NAME>=<value>` pair Claude can substitute into form fields by name match |
 
 Loading rule (run from `mcp-cli-exec` at the start of Phase 0):
@@ -271,7 +274,7 @@ Static recon checklist — produce a written **Recon Report** at the end of Phas
 | What classes do SSL pinning?                                                   | `search_classes_by_keyword` for `CertificatePinner`, `TrustManager`, `X509TrustManager`, `pinning`, `OkHttpClient.Builder.certificatePinner`                                                                                                                                                               |
 | What crypto APIs are used?                                                     | `search_method_by_name` for `Cipher.getInstance`, `MessageDigest.getInstance`, `Mac.getInstance`, `KeyGenerator`, `SecretKeySpec`, `IvParameterSpec`                                                                                                                                                       |
 | Where are credentials/tokens read or written?                                  | `search_classes_by_keyword` for `SharedPreferences`, `getSharedPreferences`, `EncryptedSharedPreferences`, `KeyStore.getInstance`                                                                                                                                                                          |
-| Hardcoded secrets?                                                             | `get_strings` then grep `(?i)(api[_-]?key                                                                                                                                                                                                                                                                  | secret | token | aws | bearer | password | jdbc | http[s]?://)` |
+| Hardcoded secrets?                                                             | `get_strings` then grep `(?i)(api[_-]?key                                                                                                                                                                                                                                                                  | secret | token | aws | bearer | password | jdbc | card[_-]?number | cvv | pan | http[s]?://)` — for financial apps also scan for 13–19 digit sequences matching Luhn (potential hardcoded PANs) |
 | Is WebView used? `setJavaScriptEnabled`? `addJavascriptInterface`?             | `search_method_by_name` for `setJavaScriptEnabled`, `addJavascriptInterface`, `loadUrl`, `loadDataWithBaseURL`                                                                                                                                                                                             |
 | Are there `Log.*` calls in release?                                            | `search_method_by_name` for `Log.d`, `Log.v`, `Log.i`, `Log.e`, `printStackTrace`                                                                                                                                                                                                                          |
 | Native libs / dynamic class loading?                                           | `search_method_by_name` for `System.loadLibrary`, `DexClassLoader`, `PathClassLoader`                                                                                                                                                                                                                      |
@@ -546,7 +549,7 @@ Each entry: **what it tests → which tools → how to execute → what evidence
   ```
   Fail if `persist:root` or any AsyncStorage key contains API keys, SDK secrets, tokens, or PII in plaintext.
 - Evidence: the XML files in `shared_prefs/` subdir on disk, the hook log showing keys with sensitive values written in plaintext, the source-code reference from jadx that wrote them. For RN apps: `RKStorage.db` and `RKStorage_dump.txt`.
-- Fail if: passwords, tokens, PII, session IDs, PINs visible without encryption (and the app is not using `EncryptedSharedPreferences`).
+- Fail if: passwords, tokens, PII, session IDs, PINs, or **card data** (`CARD_NUMBER`, `CARD_CVV`, `CARD_EXPIRY`) visible without encryption (and the app is not using `EncryptedSharedPreferences`). Card data in plaintext storage is always **Critical** severity regardless of app type.
 
 **S-2. SQLite database leak**
 
@@ -728,7 +731,7 @@ Finding classification when native pinning cannot be bypassed:
 
 **N-3. Certificate validation** — temporarily install a self-signed cert outside the system trust store and re-test. If the app trusts user-trust-store certs on Android 7+ without a `network_security_config.xml` opt-in, that is a finding for `targetSdk >= 24`.
 
-**N-4. Sensitive data in URLs / headers** — grep transcript for `(?i)token|password|sessionid|jwt` in URL query strings, `Referer`, and custom headers.
+**N-4. Sensitive data in URLs / headers** — grep transcript for `(?i)token|password|sessionid|jwt|card|cvv|pan|expiry` in URL query strings, `Referer`, and custom headers. For financial apps, also scan for card numbers matching the Luhn pattern (`\b(?:\d[ -]?){13,19}\b`) and CVV/expiry values transmitted in cleartext.
 
 **N-5. Server-side checks** — observed in transcript: tamper a request with mitm `--mode regular` + an interceptor script; replay with modified body/headers and confirm server-side validation. (Optional — flag for the user when out of scope.)
 
