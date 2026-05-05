@@ -132,7 +132,7 @@ Hard rules:
 | mitmproxy CA hash              | `c8750f0d` (recompute with `openssl x509 -subject_hash_old`)                                   |
 | Python with Frida              | `python3.12`                                                                                   |
 | Capture output                 | `/tmp/mitm.log`, `/tmp/capture.flow`                                                           |
-| `DAST_HOME`                    | Absolute path to this repository — resolved at Phase 0 from the workspace location (see below) |
+| `DAST_HOME`                    | **Always the `mobile-security-workflow` project folder** — the directory containing this `CLAUDE.md`. Resolved at Phase 0 from the workspace location. Evidence, APKs, and scripts are all relative to this path. |
 | Working dir                    | `${DAST_HOME}/`                                                                                |
 | Frida scripts                  | `${DAST_HOME}/scripts/`                                                                        |
 | Pulled APKs                    | `${DAST_HOME}/apks/`                                                                           |
@@ -145,7 +145,7 @@ The infrastructure setup (mitm install, proxy config, system-CA install, frida-s
 ### 4.1 Repository Structure
 
 ```
-mobile-dast/
+mobile-security-workflow/        ← DAST_HOME — this is always the root
 ├── .env                          # Local credentials — NOT committed (see .env-sample)
 ├── .env.<package>                # Per-app credential overrides — NOT committed
 ├── .env-sample                   # Committed template — copy to .env and fill values
@@ -224,11 +224,13 @@ Phases 2 and 4 produce a **target list** that drives Phase 5: e.g. "the app uses
 Run the existing preflight checks (§11 Step 0) and skip subsystems already healthy. Then:
 
 ```bash
-# Resolve DAST_HOME — the directory containing this CLAUDE.md file.
-# Claude knows this from the workspace location; substitute the actual absolute path.
-# Example: DAST_HOME="/Users/alice/projects/mobile-security-workflow"
-#          DAST_HOME="/opt/security/mobile-dast"
-DAST_HOME="<absolute-path-to-this-repo>"   # ← Claude fills this in from the workspace location
+# Resolve DAST_HOME — always the mobile-security-workflow project folder.
+# This is the folder the user selected in Cowork / the directory containing this CLAUDE.md.
+# Claude resolves it from the workspace mount path at the start of every session.
+# The mounted workspace is at /sessions/<id>/mnt/mobile-security-workflow on the session
+# filesystem, which maps to the user's actual on-disk path — use that real path here.
+# Example: DAST_HOME="/Users/cassio.junior/Documents/SourceCode/mobile-security-workflow"
+DAST_HOME="<absolute-path-to-mobile-security-workflow>"   # ← Claude fills from workspace location
 
 SESSION="$(date +%Y-%m-%d_%H%M)_${PACKAGE//./_}"
 EVIDENCE_DIR="${DAST_HOME}/evidence/${SESSION}"
@@ -484,8 +486,18 @@ ${DAST_HOME}/scripts/findings_schema.json
 # One-time dependency install (skip if already installed)
 pip install weasyprint jinja2 --break-system-packages --quiet 2>&1 | tail -3
 
+# WeasyPrint on macOS requires Homebrew's GObject/Pango libraries.
+# If libgobject-2.0-0 is missing, create the required symlinks once:
+#   ln -sf /opt/homebrew/lib/libgobject-2.0.dylib /opt/homebrew/lib/libgobject-2.0-0
+#   ln -sf /opt/homebrew/lib/libpango-1.0.dylib    /opt/homebrew/lib/libpango-1.0-0
+#   ln -sf /opt/homebrew/lib/libpangocairo-1.0.dylib /opt/homebrew/lib/libpangocairo-1.0-0
+#   ln -sf /opt/homebrew/lib/libpangoft2-1.0.dylib /opt/homebrew/lib/libpangoft2-1.0-0
+
+# generate_report.py lives in the mobile-dast scripts folder (not mobile-security-workflow)
+SCRIPTS_DIR="/Users/cassio.junior/Desktop/mobile-dast/scripts"
+
 # Generate — screenshots-dir is auto-detected but shown explicitly for clarity
-python3.12 ${DAST_HOME}/scripts/generate_report.py \
+DYLD_LIBRARY_PATH=/opt/homebrew/lib python3.12 "${SCRIPTS_DIR}/generate_report.py" \
   "${DAST_HOME}/evidence/<SESSION>/findings.json" \
   "${DAST_HOME}/evidence/<SESSION>/<SESSION>_report.pdf" \
   --screenshots-dir "${DAST_HOME}/evidence/<SESSION>/screenshots"
@@ -1352,7 +1364,8 @@ When testing an unfamiliar app, after the run append a new row with:
 - **reCAPTCHA Enterprise blocks login on emulator** — reCAPTCHA Enterprise requires real Google TLS to bootstrap its attestation token. When mitm proxy intercepts Google endpoints, reCAPTCHA SDK never initialises and the login button's `onPress` callback never fires. Mitigations: (a) temporarily disable proxy for `*.google.com` / `*.gstatic.com` in mitm's `ignore_hosts`; (b) bypass the reCAPTCHA SDK via Frida (hook `RecaptchaClient.execute` → return a fake token); (c) patch the minimum threshold in the Redux/manifest config to 0.0.
 - **`isRooted` / `m6.E` false positive** — searching for `isRooted` in jadx will find Firebase's `OsData` telemetry model (class `m6.E` or similar obfuscated names) which stores `isRooted` as a boolean field. This is NOT app-level root enforcement — it just records device state for analytics. Always call `get_class_source` on any candidate class and confirm it actually gates the application flow (throws exception, shows dialog, kills process) before reporting it as root detection.
 - **mcp-cli-exec shell variable persistence** — each `mcp-cli-exec` tool call spawns a fresh shell. Variables set in one call (e.g., `EDIR="/path/..."`) are NOT available in the next call. Never split variable assignment and use across separate tool calls. Fix: always use **absolute paths** inline, or `cd` into the target directory within the **same** command string, e.g.: `cd ${DAST_HOME}/evidence/session/ && find . -type f | sort > INDEX.txt`.
-- **`Write` tool cannot write to `$HOME/...`** — the `Write`/`Edit` tools operate in the sandboxed session filesystem. To write evidence files to the user's /mobile-dast tree, use `mcp-cli-exec` with a heredoc: `cat > "$HOME/.../file.xml" << 'EOF' ... EOF`. This is the correct and only pattern for writing static artifacts to the evidence directory.
+- **`Write` tool cannot write to `$HOME/...`** — the `Write`/`Edit` tools operate in the sandboxed session filesystem. To write evidence files into `${DAST_HOME}/evidence/...` (which is under `$HOME`), use `mcp-cli-exec` with a Python one-liner or heredoc: `python3.12 -c "open('/Users/.../evidence/.../file.xml','w').write(content)"`. This is the correct and only pattern for writing static artifacts to the evidence directory.
+- **Evidence always goes to `${DAST_HOME}/evidence/`** — `DAST_HOME` is the `mobile-security-workflow` project folder (the user's selected workspace). Never write evidence to `/tmp/mobile-dast/` or any other path. All session artifacts — screenshots, SharedPrefs pulls, logcat, findings.json, and the PDF — must land in `${DAST_HOME}/evidence/<SESSION>/` so they persist after the session and are accessible to the user.
 - **ADB backup dialog timing** — `adb backup` is a blocking foreground command. If Claude sends it as a background process (`&`) and then tries to tap the dialog, the backup PID may differ from an earlier stale dialog. Pattern: run `adb backup -f /path/out.ab ${PACKAGE} &`, capture the PID immediately, wait 2s, then tap the dialog; then `wait` on the PID to confirm it completed.
 
 ---
